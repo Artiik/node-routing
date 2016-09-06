@@ -1,41 +1,19 @@
 
 var express = require('express'),
     router = express.Router(),
-    path = require('path');
+    siteController = require('./Controllers/site.controller'),
+    dashboardController = require('./Controllers/dashboard.controller');
 
-//create routes
-router.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
-});
+//site routes ==========================
+router.get('/', siteController.showHome);
+router.get('/about', siteController.showAbout);
+router.get('/contact', siteController.showContact);
+router.post('/contact', siteController.showContactPost);
+router.get('/@:username/:post_slag', siteController.showUsername);
+router.use(siteController.show404);
 
-router.get('/about', function (req, res) {
-    res.json({ message: 'Hello from about!' });
-});
-
-router.get('/contact', function (req, res) {
-    res.sendFile(path.join(__dirname, '../public/contact.html'));
-});
-
-router.post('/contact', function (req, res) {
-    console.log(req.body);
-    res.send('Hello ' + req.body.name + '! Glad to see you!');
-});
-
-router.get('/@:username/:post_slag', function (req, res) {
-    console.log(req.params.username);
-
-    //grab user profile
-    //grab the post
-
-    res.send('You read article ' + req.params.post_slag +
-        ' by ' + req.params.username);
-});
-
-//404
-router.use(function (req, res, next) {
-    res.status(404);
-    res.sendFile(path.join(__dirname, '../public/404.html'));
-});
+//dashboard routes ==========================
+router.get('/dashboard', dashboardController.showDashboard);
 
 //export router
 module.exports = router;

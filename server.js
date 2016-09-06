@@ -13,7 +13,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //set routes
 app.use(require('./app/routes'));
 
-
 // function authenticate(req, res, next) {
 //     console.log('authenticate user');
 //     //make sure the user is authenticated
