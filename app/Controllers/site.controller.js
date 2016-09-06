@@ -32,7 +32,7 @@ function showUsername(req, res) {
     //grab user profile
     //grab the post
     res.send('You read article ' + req.params.post_slag +
-        ' by ' + req.params.username);
+        ' by ' + req.params.username + ' Hosted by ' + req.user.username);
 }
 
 //404
